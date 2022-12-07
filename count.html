@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>統計用的</title>
+    <link
+      rel="stylesheet"
+      href="https://meyerweb.com/eric/tools/css/reset/reset200802.css"
+    />
+    <style>
+      body {
+        margin: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      main {
+        width: 400px;
+      }
+      * {
+        box-sizing: border-box;
+        /* border: 1px solid red; */
+      }
+      table {
+        width: 100%;
+        /* border: 1px solid #000; */
+        margin: 10px 0;
+        padding: 0 10px;
+      }
+
+      textarea {
+        border: 1px solid #a0a0a0;
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        resize: none;
+        display: inline;
+        background-color: rgb(248, 248, 248);
+      }
+      th {
+        width: 100px;
+        font-size: 12px;
+      }
+      td {
+        text-align: center;
+        width: 50px;
+        border: 1px solid #a0a0a0;
+      }
+      button {
+        border: 0;
+        border-radius: 2px;
+        background-color: rgb(217, 226, 238);
+        margin: 2px;
+      }
+      main > button {
+        display: block;
+        margin: 0 auto;
+      }
+      div {
+        border: 1px solid #a0a0a0;
+        width: 100%;
+        height: 112px;
+        padding: 10px;
+        font-size: 15px;
+        display: none;
+        margin-bottom: 3px;
+      }
+      .on {
+        display: block;
+      }
+      .off {
+        display: none;
+      }
+      .day{
+          text-align: center;
+          padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <input type="date" class="day" />　　井 <input type="text" class="day">
+
+      <table id="gacha_sum">
+        <tr>
+          <th style="background-color: rgb(196, 214, 236)">蒼光の御印</th>
+          <td
+            style="border: none; background-color: rgb(196, 214, 236)"
+            id="blue"
+          >
+            0
+          </td>
+        </tr>
+        <tr>
+          <th>總抽數</th>
+          <td id="res">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <th>bad moon</th>
+          <td id="gd">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+        </tr>
+        <tr>
+          <th>單抽</th>
+          <td id="c1">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <th>6%</th>
+          <td id="p6">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+        </tr>
+        <tr>
+          <th>10連</th>
+          <td id="c10">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <th>季限</th>
+          <td id="se">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+        </tr>
+        <tr>
+          <th>綠毛</th>
+          <td id="green">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+        </tr>
+        <tr>
+          <th>紅毛</th>
+          <td id="red">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+        </tr>
+      </table>
+      <table id="add_sum">
+        <tr>
+          <td style="border: none;width: 50px;"></td>
+          <th>武器</th>
+          <td style="border: none"></td>
+          <th>召喚石</th>
+          <td style="border: none"></td>
+          <th style="width: 50px">出貨率</th>
+        </tr>
+        <tr>
+          <th style="width: 50px;">SSR</th>
+          <td id="ssr_a">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <td id="ssr_b">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <td id="ssrpp" style="font-size: 12px;">0%</td>
+        </tr>
+        <tr>
+          <th style="width: 50px;">SR</th>
+          <td id="sr_a">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <td id="sr_b">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <td id="srpp" style="font-size: 12px;">0%</td>
+        </tr>
+        <tr>
+          <th style="width: 50px;">R</th>
+          <td id="r_a">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <td id="r_b">0</td>
+          <td style="border: none">
+            <button type="button">+</button><button type="button">-</button>
+          </td>
+          <td id="rpp" style="font-size: 12px;">0%</td>
+        </tr>
+      </table>
+      <h3>出貨角色</h3>
+      <textarea name="" id="char_text" cols="30" rows="5"></textarea>
+      <div id="char_div"></div>
+      <button type="button" id="char">修改</button>
+      <h3>出貨Limited</h3>
+      <textarea name="" id="lm_text" cols="30" rows="5"></textarea>
+      <div id="lm_div"></div>
+      <button type="button" id="lm">修改</button>
+      <h3>出貨召喚石</h3>
+      <textarea name="" id="rock_text" cols="30" rows="5"></textarea>
+      <div id="rock_div"></div>
+      <button type="button" id="rock">修改</button>
+    </main>
+
+    <script>
+
+      var blue = document.querySelector("#blue");
+      var res = document.querySelector("#res");
+      var gd = document.querySelector("#gd");
+      var c1 = document.querySelector("#c1");
+      var r6 = document.querySelector("#p6");
+      var c10 = document.querySelector("#c10");
+      var se = document.querySelector("#se");
+      var green = document.querySelector("#green");
+      var red = document.querySelector("#red");
+      var ssr_a = document.querySelector("#ssr_a");
+      var ssr_b = document.querySelector("#ssr_b");
+      var ssrpp = document.querySelector("#ssrpp");
+      var sr_a = document.querySelector("#sr_a");
+      var sr_b = document.querySelector("#sr_b");
+      var srpp = document.querySelector("#srpp");
+      var r_a = document.querySelector("#r_a");
+      var r_b = document.querySelector("#r_b");
+      var rpp = document.querySelector("#rpp");
+
+      function add(ttarget) {
+        let ele = ttarget.closest("td").previousElementSibling;
+        ele.innerText = parseInt(ele.innerText) + 1;
+      }
+      function reduce(ttarget) {
+        let ele = ttarget.closest("td").previousElementSibling;
+        ele.innerText = parseInt(ele.innerText) - 1;
+      }
+      function edit(ttarget) {
+        let text = document.querySelector(`#${ttarget.id}_text`);
+        let div = document.querySelector(`#${ttarget.id}_div`);
+
+        div.innerText = text.value;
+
+        text.classList.toggle("off");
+        div.classList.toggle("on");
+      }
+
+      function count(){
+          res.innerText = parseInt(ssr_a.innerText) + parseInt(ssr_b.innerText*1) + parseInt(sr_a.innerText*1) + parseInt(sr_b.innerText*1)+ parseInt(r_a.innerText*1) + parseInt(r_b.innerText*1);
+          blue.innerText = res.innerText;
+          let ssr =(parseInt(ssr_a.innerText)+parseInt(ssr_b.innerText))/parseInt(res.innerText) *100;
+          let sr =(parseInt(sr_a.innerText)+parseInt(sr_b.innerText))/parseInt(res.innerText) *100;
+          let r =(parseInt(r_a.innerText)+parseInt(r_b.innerText))/parseInt(res.innerText) *100;
+          ssrpp.innerText = ssr.toFixed(2) +'%'
+          srpp.innerText = sr.toFixed(2) +'%'
+          rpp.innerText = r.toFixed(2) +'%'
+      }
+
+
+      document.addEventListener("click", (e) => {
+          
+        if (e.target.innerText == "+") {
+          add(e.target);
+          count();
+        } else if (e.target.innerText == "-") {
+          reduce(e.target);
+          count()
+        } else if (e.target.innerText == "修改") {
+          edit(e.target);
+        }
+      });
+
+
+    </script>
+  </body>
+</html>
